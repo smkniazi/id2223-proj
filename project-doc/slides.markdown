@@ -3,10 +3,10 @@
 % Jan 10,  2017
 
 ## Project Description
-- Predict the solar radiation near Earth Surface   
+- Predict the solar radiation near Earth surface   
 
 ## Data Samples
-- 1 GB of CSV files with 0.4 million samples
+- **0.4 million samples**
 - A typical sample looks like
 
 |lev|p|T|q|lwhr|
@@ -39,6 +39,9 @@
 |25|980.769|29.988|27.285|-1.448|
 
 
+## Data Samples
+![Data Samples](./img/samples.png){height=300px}
+
 ## Propose Solution
 - Regresstion Problem
 	- with 26 outputs
@@ -58,7 +61,7 @@
 ## Input (Cont'd)
 - The input can be morphed into 26 x 2 matrix 
 	- did not produce very promissing results, as pooling can not shink the width of the input matrix. 
-		- Min MSE achieved was 0.3
+		- Min MSE observed was 0.3
 
 ![26x2 Input Matrix](./img/26x2.png){height=200px}
 
@@ -96,14 +99,31 @@
 - Test data set size 100,000 (25%).
 - Inputs are normalized using max-min scaling
 	- X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
-- Learning Rate 0.05
+	- X~s~ = (X - Input~mean~) / ( Input~std~ )
+- Learning Rate 0.001
 - Dropout 0.95
-- Max number of Epochs 30000
-- Batch Size 10
+- Max number of Epochs 120000
+- Batch Size 3
 - Weights were randomly initialized such that the random numbers had *mean=0.1* and *stddev=0.3*
 - Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03* 
 
 ## Results
+
+- MSE drops to 0.003 but the network failed to predict the spikes
+
+
+![No amount of training could predict the spikes in radiation](./img/results-without-leaky.png)
+
+## Dying ReLU Problem 
+
+- "ReLU units can be fragile during training and can “die”. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again." [^dr]
+
+[^dr]: http://cs231n.github.io/neural-networks-1/
+
+## Solution Leaky ReLU
+
+- Use a Leaky ReLU
+	- Slop 0.001
 
 ![Mean Square Error of the CNN Model](./img/result1.png)
 
