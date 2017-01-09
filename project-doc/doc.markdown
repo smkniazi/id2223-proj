@@ -82,13 +82,19 @@ Macbook. The following are the values for different parameters obtained after op
 - Batch Size 100
 - Weights and biases are initialized to zeros
 
-![Mean Square Error of the FFN Model \label{fig:ff_result}](./img/result_ff.png)
+![Mean Square Error of the FFN Model \label{fig:result_ff}](./img/result_ff.png)
 
-Figure \ref{result_ff} shows the Mean Square Error *MSE* against the number of epochs. We can see that the MSE
+![Sample prediction of FFN \label{fig:result_ff_1}](./img/result_ff_1.png)
+
+![Sample prediction of FFN \label{fig:result_ff_2}](./img/result_ff_2.png)
+
+Figure \ref{fig:result_ff} shows the Mean Square Error *MSE* against the number of epochs. We can see that the MSE
 decreases exponentially as more training batches are performed until it stabilizes at a MSE of 0.000491042. However,
-despite the very low MSE, when we look at some sample results such as in Figure \ref{resuts_ff_1} and Figure
-\ref{results_ff_2} we can see that our model is not able to predict the local spikes. To overcome this limitation,
+despite the very low MSE, when we look at some sample results such as in Figure \ref{fig:result_ff_1} and Figure
+\ref{fig:result_ff_2} we can see that our model is not able to predict the local spikes. To overcome this limitation,
 we opted to go for another solution based on convolution neural networks.
+
+
 
 ## Convolution Neural Network Solution
 
