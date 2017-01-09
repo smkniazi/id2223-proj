@@ -1,5 +1,5 @@
 % ID2223 Project
-% Salman Niazi, Shadi Issa
+% Salman Niazi and Shadi Issa
 % Jan 10,  2017
 
 ## Project Description
@@ -64,7 +64,21 @@
 
 ## Feedforward Neural Network Setup
 
+- Training data set size 1,400,000 (70%).
+- Test data set size 600,000 (30%).
+- Max number of Epochs 14000
+- Batch Size 100
+- Weights and biases are initialized to zeros
+
 ## Evaluation
+
+![MSE of the FFN](./img/result_ff.png)
+
+- minimum MSE: 0.000491042
+
+## Evaluation
+
+![MSE of the FFN](./img/result_ff_2.png)
 
 ## Discussion
 
@@ -135,7 +149,7 @@
 
 ## Dying ReLU Problem
 
-- Inaccurate data. 
+- Inaccurate data.
 	- Rounding Errors
 
 - "ReLU units can be fragile during training and can “die”. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again." [^dr]
@@ -147,9 +161,9 @@
 - Use a Leaky ReLU
 	- Slop 0.001
 
-![Mean Square Error of the CNN Model](./img/result2.png)
+![Sample output](./img/result2.png)
 
 ##
-![Mean Square Error of the CNN Model](./img/result1.png)
+![Sample output](./img/result1.png)
 
 ## Questions ?

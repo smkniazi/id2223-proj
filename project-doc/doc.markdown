@@ -148,11 +148,11 @@ For regularization *dropout* is used in the last fully connected layer.  The dro
 
 ## Leaky ReLU
 
-During our evaluation we found that the CNN also could not predict the spikes. The main cause of the problem was dead neurons in the model. 
+During our evaluation we found that the CNN also could not predict the spikes. The main cause of the problem was dead neurons in the model.
 
 "ReLU units can be fragile during training and can “die”. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again." [^dr]
 
-Dead neurons problem can be solved using Leaky ReLU abstraction. In Leaky ReLU the sloap was set ot 0.001. 
+Dead neurons problem can be solved using Leaky ReLU abstraction. In Leaky ReLU the sloap was set ot 0.001.
 
 
 [^dr]: http://cs231n.github.io/neural-networks-1/
