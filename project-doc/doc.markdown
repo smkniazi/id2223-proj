@@ -1,9 +1,9 @@
 # **ID2223 Project**
-# Group members: Salman Niazi
+# Group members: Salman Niazi and Shadi Issa
 
 
 ## Project Description
-The goal of the project is to predict the solar radiation level near the Earth’s surface. The data set consists of 0.4 million labeled data samples stored in individual files in CSV format. A data sample looks like the following. 
+The goal of the project is to predict the solar radiation level near the Earth’s surface. The dataset consists of 2 million labeled data samples stored in individual files in CSV format. A data sample looks like the following.
 
 |lev|p|T|q|lwhr|
 |---|---|---|---|---|
@@ -34,44 +34,11 @@ The goal of the project is to predict the solar radiation level near the Earth�
 |24|942.308|26.804|26.464|-0.053|
 |25|980.769|29.988|27.285|-1.448|
 
-The first two columns (**lev**, **p**) are static, that is, the values of these columns in all the data sample are the same. The first column is the index. Therefore, the first two columns does not add contain any useful information that can be used to predict the final labels. The column **T** represents the temperature, **q** represents the pressure and the column **lwhr** represents the radiation. The **lwhr** is the label column. Each CSV file contain exactly 26 data points representing temperature, pressure and solar radiation at the Earth's surface at 26 different heights. For example, in the above data the 26th data point shows that the temperature near the Earth surface is 29.988, the pressure is 27.285 and the solar radiation is -1.448. 
-
-## Proposed Solution
-The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*. I have chosen convolution neural networks *(CNN)* for this problem as CNN are suitable for problems when there is a corelation between the input features. In out case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
-
-
-## Convolution Neural Network Model
-
-The model of the convolution neural network model in shown in the following figure. 
-![Convolution Neural Network Model](./img/network.png)
-
-The CNN model consists of three convolution layers, two fully connected layers and an output layer. 
-
-- **Layer 1 (Convolution):** The first layer is a convolution layer that uses *2x2* filter with *32* features. The layer is followed by a ReLU normalization layer and max pooling layer with a stride of *1*. 
-- **Layer 2 (Convolution):** The second layer is a convolution layer that uses *2x2* filter with *64* features. The layer is followed by a ReLU normalization layer and max pooling layer with a stride of *2*. 
-- **Layer 3 (Convolution):** The third layer is a convolution layer that uses *2x2* filter with *128* features. The layer is followed by a ReLU normalization layer and max pooling layer with a stride of *2*. 
-- **Layer 4 (Fully Connected Layer):** The fourth layer is fully connected layer with 512 neurons using ReLU activation function. 
-- **Layer 5 (Fully Connected Layer):** The fourth layer is fully connected layer with 256 neurons using ReLU activation function. 
-- **Layer 6 (Output Layer):** The last layer is 26 neuron output layer.
-
-### Input 
-The convolutin neural network expects an input matrix of size *m x n* size. We could combine the **T** and **q** columns to form a 26x2 matrix as shown below.
-
-![26x2 Input Matrix](./img/26x2.png){height=200px}
-
-This 26x2 input matrix did not produce very promissing results, as pooling can not shink the width of the input matrix. The minimum mean square error achieved uisng this input format was 0.3. 
-
-The input can be morphed into 8 x 8 matrix with zero padding as there are only 52 input features 
-
-![8 x 8 Input Matrix](./img/8x8.png){height=100px}
-
-## Convolution Neural Network Model
-
-![8 x 8 Input Matrix](./img/network.png)
+The first two columns (**lev**, **p**) are static, that is, the values of these columns in all the data samples are the same. Therefore, the first two columns does not add contain any useful information that can be used to predict the final labels. The column **T** represents the temperature, **q** represents the pressure and the column **lwhr** represents the radiation. The **lwhr** is the label column. Each CSV file contains exactly 26 data points representing temperature, pressure and solar radiation at the Earth's surface at 26 different heights. For example, in the above data the 26th data point shows that the temperature near the Earth surface is 29.988, the pressure is 27.285 and the solar radiation is -1.448.
 
 ### Feature Normalization
 
-The input features and the label values vary quite a lot that causes the gradient to fluctuate. All the input features and labels are normalized using min-max scaling. Which is defined as 
+The input features and the label values vary quite a lot that causes the gradient to fluctuate. All the input features and labels are normalized using min-max scaling. Which is defined as
 
 X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
 
@@ -81,11 +48,74 @@ X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
 |**q**|0.0|27.285|
 |**lwhr**|-9.94|6.69|
 
-### Regularization 
 
-For regularization *dropout* is used in the last fully connected layer.  The dropout value was set to *0.95*, that is, during each training epoch 5% of the neurons in the last fully connected layer are randomly set inactive. This enables all neurons to equally learn the model. 
+## Initial Solution
+According to the universal approximation theorem, Feedforward neural networks with a single
+hidden layer can approximate continuous functions. In our problem we are trying to replace an
+analytical model with a statistical model to enhance the performance; hence a feedforward
+neural network with a single hidden layer is ought to be a suitable solution.
 
-### Model Complexity 
+## Feedforward Neural Network Model
+
+![Architecture of feedforward neural network \label{fig:ff}](./img/ff.png)
+
+Figure \ref{fig:ff} shows the model of our feedforward network. It is composed of a single
+hidden layer with 20 neurons and an output layer of a single linear neuron. Neurons within the
+hidden layer use a sigmoid activation function. The weights of the hidden neurons has the
+structure $26\times1$, while the weights of the output neuron has the structure $1\times26$
+to produce the output \emph{lwhr}. Both hidden and output layer have a bias that is initialized to zero.
+
+## Evaluation
+
+The model was implemented using Tensorflow running in a VMware virtual machine which is install on a 2 core
+Macbook. The following are the values for different parameters obtained after hyper-parameter optimization.
+
+- Training data set size 1,400,000 (70%).
+- Test data set size 600,000 (30%).
+- Learning Rate 0.05
+- Max number of Epochs 14000
+- Batch Size 100
+- Weights were randomly initialized such that the random numbers had *mean=0.1* and *stddev=0.3*
+- Bias are initialized to zeros
+
+
+![Mean Square Error of the FFN Model \label{fig:ff_result}](./img/result_ff.png)
+
+
+
+
+## Proposed Solution
+The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*. I have chosen convolution neural networks *(CNN)* for this problem as CNN are suitable for problems when there is a corelation between the input features. In out case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
+
+## Convolution Neural Network Model
+
+![Convolution Neural Network Model \label{fig:cnn}](./img/network.png)
+
+The model of the convolution neural network model is shown in Figure \ref{fig:cnn}. It consists of three convolution layers, two fully connected layers and an output layer.
+
+- **Layer 1 (Convolution):** The first layer is a convolution layer that uses *2x2* filter with *32* features. The layer is followed by a ReLU normalization layer and max pooling layer with a stride of *1*.
+- **Layer 2 (Convolution):** The second layer is a convolution layer that uses *2x2* filter with *64* features. The layer is followed by a ReLU normalization layer and max pooling layer with a stride of *2*.
+- **Layer 3 (Convolution):** The third layer is a convolution layer that uses *2x2* filter with *128* features. The layer is followed by a ReLU normalization layer and max pooling layer with a stride of *2*.
+- **Layer 4 (Fully Connected Layer):** The fourth layer is fully connected layer with 512 neurons using ReLU activation function.
+- **Layer 5 (Fully Connected Layer):** The fourth layer is fully connected layer with 256 neurons using ReLU activation function.
+- **Layer 6 (Output Layer):** The last layer is 26 neuron output layer.
+
+### Input
+The convolutin neural network expects an input matrix of size *m x n* size. We could combine the **T** and **q** columns to form a 26x2 matrix as shown below.
+
+![26x2 Input Matrix \label{fig:input}](./img/26x2.png){height=200px}
+
+This 26x2 input matrix did not produce very promissing results, as pooling can not shink the width of the input matrix. The minimum mean square error achieved uisng this input format was 0.3.
+
+The input can be morphed into 8 x 8 matrix with zero padding as there are only 52 input features
+
+![8 x 8 Input Matrix \label{fig:input_mat}](./img/8x8.png){height=100px}
+
+### Regularization
+
+For regularization *dropout* is used in the last fully connected layer.  The dropout value was set to *0.95*, that is, during each training epoch 5% of the neurons in the last fully connected layer are randomly set inactive. This enables all neurons to equally learn the model.
+
+### Model Complexity
 
 |Layer|Size|Memory|Weights|Bias|
 |-------|------------|-------------------------|-----------------------|----------------|
@@ -102,21 +132,20 @@ For regularization *dropout* is used in the last fully connected layer.  The dro
 
 **Total memory  = 413908 x 4 bytes (*float32*) x 2 (back propagation) = 3311264 = 3.1 Megabytes**
 
-## Evaluation 
+## Evaluation
 
-The model was implemented using Tensorflow running in a docker instance. The docker instance was run on HP ProLiant DL360p Gen8 with 32 cores and 256 GB of RAM. Following are the values for different parameters values obtained after hyper-parameter optimization. 
+The model was implemented using Tensorflow running in a docker instance. The docker instance was run on HP ProLiant DL360p Gen8 with 32 cores and 256 GB of RAM. Following are the values for different parameters values obtained after hyper-parameter optimization.
 
-- Training data set size 300,000 (75%). 
+- Training data set size 300,000 (75%).
 - Test data set size 100,000 (25%).
 - Learning Rate 0.05
 - Dropout 0.95
 - Max number of Epochs 30000
 - Batch Size 10
 - Weights were randomly initialized such that the random numbers had *mean=0.1* and *stddev=0.3*
-- Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03* 
+- Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03*
 
 
-![Mean Square Error of the CNN Model](./img/result1.png)
+![Mean Square Error of the CNN Model \label{fig:cnn_result}](./img/result1.png)
 
-The above figure show how the mean square error (MSE) of the model drops as the training progresses. The x-axis of the graphs show the elapsed epochs and the y-axis of the graphs show the MSE. The graph on the left is a zoomed version of the graph on the right. The zoomed version of the graphs show last ten epochs. From the graphs it is clear that MSE drop to 0.0009 after 2800 epochs. 
-
+Figure \ref{fig:cnn_result} shows how the mean square error (MSE) of the model drops as the training progresses. The x-axis of the graphs show the elapsed epochs and the y-axis of the graphs show the MSE. The graph on the left is a zoomed version of the graph on the right. The zoomed version of the graphs show last ten epochs. From the graphs it is clear that MSE drop to 0.0009 after 2800 epochs.
