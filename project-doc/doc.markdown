@@ -50,9 +50,9 @@ X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
 
 
 ## Proposed Solutions
-The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*. 
+The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*.
 
-We have implemented the solution using the *feed forward neural networks* and *convolution neural networks*. 
+We have implemented the solution using the *feed forward neural networks* and *convolution neural networks*.
 
 
 ## Initial Solution
@@ -68,36 +68,38 @@ neural network with a single hidden layer is ought to be a suitable solution.
 Figure \ref{fig:ff} shows the model of our feedforward network. It is composed of a single
 hidden layer with 20 neurons and an output layer of a single linear neuron. Neurons within the
 hidden layer use a sigmoid activation function. The weights of the hidden neurons has the
-structure $52\times1$, while the weights of the output neuron has the structure $1\times26$
+structure $26\times1$, while the weights of the output neuron has the structure $1\times26$
 to produce the output \emph{lwhr}. Both hidden and output layer have a bias that is initialized to zero.
 
 ### Evaluation
 
 The model was implemented using Tensorflow running in a VMware virtual machine which is install on a 2 core
-Macbook. The following are the values for different parameters obtained after hyper-parameter optimization.
+Macbook. The following are the values for different parameters obtained after optimization.
 
 - Training data set size 1,400,000 (70%).
 - Test data set size 600,000 (30%).
-- Learning Rate 0.05
 - Max number of Epochs 14000
 - Batch Size 100
-- Weights were randomly initialized such that the random numbers had *mean=0.1* and *stddev=0.3*
-- Bias are initialized to zeros
-
+- Weights and biases are initialized to zeros
 
 ![Mean Square Error of the FFN Model \label{fig:ff_result}](./img/result_ff.png)
 
+Figure \ref{result_ff} shows the Mean Square Error *MSE* against the number of epochs. We can see that the MSE
+decreases exponentially as more training batches are performed until it stabilizes at a MSE of 0.000491042. However,
+despite the very low MSE, when we look at some sample results such as in Figure \ref{resuts_ff_1} and Figure
+\ref{results_ff_2} we can see that our model is not able to predict the local spikes. To overcome this limitation,
+we opted to go for another solution based on convolution neural networks.
 
 ## Convolution Neural Network Solution
 
-Next, we choose convolution neural networks *(CNN)* for this problem as CNN are suitable for problems when there is a corelation between the input features. In our case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
+Next, we choose convolution neural networks *(CNN)* as CNN are suitable for problems when there is a correlation between the input features. In our case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
 
 ### Input
 The convolutin neural network expects an input matrix of size *m x n* size. We could combine the **T** and **q** columns to form a 26x2 matrix as shown below.
 
 ![26x2 Input Matrix \label{fig:input}](./img/26x2.png){height=200px}
 
-This 26x2 input matrix did not produce very promissing results, as pooling can not shink the width of the input matrix. The minimum mean square error achieved uisng this input format was 0.3.
+This 26x2 input matrix did not produce very promissing results, as pooling can not shink the width of the input matrix. The minimum MSE achieved uisng this input format was 0.3.
 
 The input can be morphed into 8 x 8 matrix with zero padding as there are only 52 input features
 
@@ -152,7 +154,7 @@ The model was implemented using Tensorflow running in a docker instance. The doc
 - Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03*
 
 
-Following figures show a sample predictions of our model. With all the optimization the model accurately predicts the output including the spikes in the labels. The square error of each prediction is written under the graph. 
+Following figures show a sample predictions of our model. With all the optimization the model accurately predicts the output including the spikes in the labels. The square error of each prediction is written under the graph.
 
 
 ![Square Error: 0.00235824](./img/p1.png)
@@ -165,5 +167,3 @@ Following figures show a sample predictions of our model. With all the optimizat
 
 
 ![Square Error: 0.0198945](./img/p4.png)
-
-
