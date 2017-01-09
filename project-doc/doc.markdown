@@ -152,6 +152,18 @@ The model was implemented using Tensorflow running in a docker instance. The doc
 - Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03*
 
 
-![Mean Square Error of the CNN Model \label{fig:cnn_result}](./img/result1.png)
+Following figures show a sample predictions of our model. With all the optimization the model accurately predicts the output including the spikes in the labels. The square error of each prediction is written under the graph. 
 
-Figure \ref{fig:cnn_result} shows how the mean square error (MSE) of the model drops as the training progresses. The x-axis of the graphs show the elapsed epochs and the y-axis of the graphs show the MSE. The graph on the left is a zoomed version of the graph on the right. The zoomed version of the graphs show last ten epochs. From the graphs it is clear that MSE drop to 0.0009 after 2800 epochs.
+
+![Square Error: 0.00235824](./img/p1.png)
+
+
+![Square Error: 0.00270954](./img/p2.png)
+
+
+![Square Error: 0.00112128](./img/p3.png)
+
+
+![Square Error: 0.0198945](./img/p4.png)
+
+
