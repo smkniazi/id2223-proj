@@ -3,7 +3,7 @@
 
 
 ## Project Description
-The goal of the project is to predict the solar radiation level near the Earth’s surface. The dataset consists of 2 million labeled data samples stored in individual files in CSV format. A data sample looks like the following.
+The goal of the project is to predict the solar radiation level near the Earth’s surface. The dataset consists of 0.4 million labeled data samples stored in individual files in CSV format. A data sample looks like the following.
 
 |lev|p|T|q|lwhr|
 |---|---|---|---|---|
@@ -49,13 +49,17 @@ X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
 |**lwhr**|-9.94|6.69|
 
 
+## Proposed Solution
+The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*. 
+
+
 ## Initial Solution
 According to the universal approximation theorem, Feedforward neural networks with a single
 hidden layer can approximate continuous functions. In our problem we are trying to replace an
 analytical model with a statistical model to enhance the performance; hence a feedforward
 neural network with a single hidden layer is ought to be a suitable solution.
 
-## Feedforward Neural Network Model
+### Feedforward Neural Network Model
 
 ![Architecture of feedforward neural network \label{fig:ff}](./img/ff.png)
 
@@ -65,7 +69,7 @@ hidden layer use a sigmoid activation function. The weights of the hidden neuron
 structure $26\times1$, while the weights of the output neuron has the structure $1\times26$
 to produce the output \emph{lwhr}. Both hidden and output layer have a bias that is initialized to zero.
 
-## Evaluation
+### Evaluation
 
 The model was implemented using Tensorflow running in a VMware virtual machine which is install on a 2 core
 Macbook. The following are the values for different parameters obtained after hyper-parameter optimization.
@@ -82,12 +86,12 @@ Macbook. The following are the values for different parameters obtained after hy
 ![Mean Square Error of the FFN Model \label{fig:ff_result}](./img/result_ff.png)
 
 
+## Convolution Neural Network Solution
+
+Next, we choose convolution neural networks *(CNN)* for this problem as CNN are suitable for problems when there is a corelation between the input features. In our case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
 
 
-## Proposed Solution
-The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*. I have chosen convolution neural networks *(CNN)* for this problem as CNN are suitable for problems when there is a corelation between the input features. In out case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
-
-## Convolution Neural Network Model
+### Convolution Neural Network Model
 
 ![Convolution Neural Network Model \label{fig:cnn}](./img/network.png)
 
