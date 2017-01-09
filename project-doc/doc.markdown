@@ -146,6 +146,17 @@ For regularization *dropout* is used in the last fully connected layer.  The dro
 
 **Total memory  = 413908 x 4 bytes (*float32*) x 2 (back propagation) = 3311264 = 3.1 Megabytes**
 
+## Leaky ReLU
+
+During our evaluation we found that the CNN also could not predict the spikes. The main cause of the problem was dead neurons in the model. 
+
+"ReLU units can be fragile during training and can “die”. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again." [^dr]
+
+Dead neurons problem can be solved using Leaky ReLU abstraction. In Leaky ReLU the sloap was set ot 0.001. 
+
+
+[^dr]: http://cs231n.github.io/neural-networks-1/
+
 ## Evaluation
 
 The model was implemented using Tensorflow running in a docker instance. The docker instance was run on HP ProLiant DL360p Gen8 with 32 cores and 256 GB of RAM. Following are the values for different parameters values obtained after hyper-parameter optimization.
@@ -160,16 +171,16 @@ The model was implemented using Tensorflow running in a docker instance. The doc
 - Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03*
 
 
-Following figures show a sample predictions of our model. With all the optimization the model accurately predicts the output including the spikes in the labels. The square error of each prediction is written under the graph.
+Following figures show a sample predictions of our model. With all the optimization the model accurately predicts the output including the spikes in the labels. The square error of each prediction is written under the graphs.
 
 
-![Square Error: 0.00235824](./img/p1.png)
+![Squared Error: 0.00235824](./img/p1.png)
 
 
-![Square Error: 0.00270954](./img/p2.png)
+![Squared Error: 0.00270954](./img/p2.png)
 
 
-![Square Error: 0.00112128](./img/p3.png)
+![Squared Error: 0.00112128](./img/p3.png)
 
 
-![Square Error: 0.0198945](./img/p4.png)
+![Squared Error: 0.0198945](./img/p4.png)
