@@ -1,5 +1,5 @@
 % ID2223 Project
-% Salman Niazi
+% Salman Niazi, Shadi Issa
 % Jan 10,  2017
 
 ## Project Description
@@ -42,39 +42,58 @@
 ## Data Samples
 ![Data Samples](./img/samples.png){height=300px}
 
-## Propose Solution
+## Solution
 - Regresstion Problem
 	- with 26 outputs
 
-- Could be implemented using 
+- Could be implemented using
 	- Multivariate Regression
-	- Feed Forward Neural Networks
+	- **Feed Forward Neural Networks**
 	- **Convolution Neural Networks**
 
-## Input
-- Features
-	- 26 values for T
-	- 26 values for q
-- Labels 
-	- 26 lwhr values
 
-## Input (Cont'd)
-- The input can be morphed into 26 x 2 matrix 
-	- did not produce very promissing results, as pooling can not shink the width of the input matrix. 
+
+## Feedforward Neural Network
+
+- Feedforward neural networks with a single hidden layer can approximate continuous functions
+- This can be efficient to replace an analytical model
+
+## Feedforward Neural Network Model
+
+![Architecture of feedforward neural network](./img/ff.png)
+
+## Feedforward Neural Network Setup
+
+## Evaluation
+
+## Discussion
+
+- low MSE
+- does not capture the spikes
+
+## Convolution Neural Network
+
+- Spikes are more affected by adjacent values
+- To try to capture the spikes we opt to CNNs
+- Kernels within CNN can detect local patterns
+
+## Input
+- The input can be morphed into 26 x 2 matrix
+	- did not produce very promissing results, as pooling can not shink the width of the input matrix.
 		- Min MSE observed was 0.3
 
 ![26x2 Input Matrix](./img/26x2.png){height=200px}
 
 
 ## Input (Cont'd)
-- The input can be morphed into 8 x 8 matrix 
-	- padding is needed as there are only 52 input features 
+- The input can be morphed into 8 x 8 matrix
+	- padding is needed as there are only 52 input features
 
 ![8 x 8 Input Matrix](./img/8x8.png){height=100px}
 
 ## Convolution Neural Network Model
 
-![8 x 8 Input Matrix](./img/network.png)
+![Architecture of convolution neural network](./img/network.png)
 
 ## Model Complexity
 
@@ -95,7 +114,7 @@
 
 ## Evaluation Setup
 
-- Training data set size 300,000 (75%). 
+- Training data set size 300,000 (75%).
 - Test data set size 100,000 (25%).
 - Inputs are normalized using max-min scaling
 	- X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
@@ -105,7 +124,7 @@
 - Max number of Epochs 120000
 - Batch Size 3
 - Weights were randomly initialized such that the random numbers had *mean=0.1* and *stddev=0.3*
-- Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03* 
+- Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03*
 
 ## Results
 
@@ -114,7 +133,7 @@
 
 ![No amount of training could predict the spikes in radiation](./img/results-without-leaky.png)
 
-## Dying ReLU Problem 
+## Dying ReLU Problem
 
 - "ReLU units can be fragile during training and can “die”. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again." [^dr]
 
@@ -127,7 +146,7 @@
 
 ![Mean Square Error of the CNN Model](./img/result2.png)
 
-## 
+##
 ![Mean Square Error of the CNN Model](./img/result1.png)
 
 ## Questions ?
