@@ -1,2 +1,2 @@
-pandoc doc.markdown  -o doc.pdf
+pandoc doc.markdown  -o doc.pdf && xdg-open doc.pdf
 

@@ -68,7 +68,7 @@ neural network with a single hidden layer is ought to be a suitable solution.
 Figure \ref{fig:ff} shows the model of our feedforward network. It is composed of a single
 hidden layer with 20 neurons and an output layer of a single linear neuron. Neurons within the
 hidden layer use a sigmoid activation function. The weights of the hidden neurons has the
-structure $26\times1$, while the weights of the output neuron has the structure $1\times26$
+structure $52\times1$, while the weights of the output neuron has the structure $1\times26$
 to produce the output \emph{lwhr}. Both hidden and output layer have a bias that is initialized to zero.
 
 ### Evaluation
