@@ -49,8 +49,10 @@ X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
 |**lwhr**|-9.94|6.69|
 
 
-## Proposed Solution
+## Proposed Solutions
 The goal of the project is to predict the solar radiation near the Earth's surface using the temperature and pressure values. This is a *regression* problem with 26 output labels. The problem can be solved using machine learning techniques, such as, *multivariate regression* and deep learning techniques, such as, *feed forward neural networks* and *convolution neural networks*. 
+
+We have implemented the solution using the *feed forward neural networks* and *convolution neural networks*. 
 
 
 ## Initial Solution
