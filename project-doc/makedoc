@@ -1,0 +1,2 @@
+pandoc doc.markdown  -o doc.pdf
+
