@@ -135,6 +135,9 @@
 
 ## Dying ReLU Problem
 
+- Inaccurate data. 
+	- Rounding Errors
+
 - "ReLU units can be fragile during training and can “die”. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again." [^dr]
 
 [^dr]: http://cs231n.github.io/neural-networks-1/
