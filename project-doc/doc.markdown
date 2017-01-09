@@ -92,6 +92,16 @@ Macbook. The following are the values for different parameters obtained after hy
 
 Next, we choose convolution neural networks *(CNN)* for this problem as CNN are suitable for problems when there is a corelation between the input features. In our case the input feature are corelated by height, that is the samples are collection at 26 different distances from the earth surface and the measurements of the features and the labels gradually change.  
 
+### Input
+The convolutin neural network expects an input matrix of size *m x n* size. We could combine the **T** and **q** columns to form a 26x2 matrix as shown below.
+
+![26x2 Input Matrix \label{fig:input}](./img/26x2.png){height=200px}
+
+This 26x2 input matrix did not produce very promissing results, as pooling can not shink the width of the input matrix. The minimum mean square error achieved uisng this input format was 0.3.
+
+The input can be morphed into 8 x 8 matrix with zero padding as there are only 52 input features
+
+![8 x 8 Input Matrix \label{fig:input_mat}](./img/8x8.png){height=100px}
 
 ### Convolution Neural Network Model
 
@@ -106,16 +116,6 @@ The model of the convolution neural network model is shown in Figure \ref{fig:cn
 - **Layer 5 (Fully Connected Layer):** The fourth layer is fully connected layer with 256 neurons using ReLU activation function.
 - **Layer 6 (Output Layer):** The last layer is 26 neuron output layer.
 
-### Input
-The convolutin neural network expects an input matrix of size *m x n* size. We could combine the **T** and **q** columns to form a 26x2 matrix as shown below.
-
-![26x2 Input Matrix \label{fig:input}](./img/26x2.png){height=200px}
-
-This 26x2 input matrix did not produce very promissing results, as pooling can not shink the width of the input matrix. The minimum mean square error achieved uisng this input format was 0.3.
-
-The input can be morphed into 8 x 8 matrix with zero padding as there are only 52 input features
-
-![8 x 8 Input Matrix \label{fig:input_mat}](./img/8x8.png){height=100px}
 
 ### Regularization
 
@@ -142,12 +142,12 @@ For regularization *dropout* is used in the last fully connected layer.  The dro
 
 The model was implemented using Tensorflow running in a docker instance. The docker instance was run on HP ProLiant DL360p Gen8 with 32 cores and 256 GB of RAM. Following are the values for different parameters values obtained after hyper-parameter optimization.
 
-- Training data set size 300,000 (75%).
-- Test data set size 100,000 (25%).
-- Learning Rate 0.05
+- Training data set size 360,000.
+- Test data set size 40,000.
+- Learning Rate 0.001
 - Dropout 0.95
-- Max number of Epochs 30000
-- Batch Size 10
+- Max number of Epochs 120000
+- Batch Size 3
 - Weights were randomly initialized such that the random numbers had *mean=0.1* and *stddev=0.3*
 - Bias were also randomly initialized such that the random numbers had *mean=0* and *stddev=0.03*
 
