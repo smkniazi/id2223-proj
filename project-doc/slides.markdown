@@ -125,6 +125,9 @@
 - Use a Leaky ReLU
 	- Slop 0.001
 
+![Mean Square Error of the CNN Model](./img/result2.png)
+
+## 
 ![Mean Square Error of the CNN Model](./img/result1.png)
 
 ## Questions ?
