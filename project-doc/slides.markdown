@@ -128,8 +128,8 @@
 
 ## Evaluation Setup
 
-- Training data set size 300,000 (75%).
-- Test data set size 100,000 (25%).
+- Training data set size 360,000.
+- Test data set size 40,000.
 - Inputs are normalized using max-min scaling
 	- X~norm~ = (X - X~min~) / ( X~max~ - X~min~)
 	- X~s~ = (X - Input~mean~) / ( Input~std~ )
