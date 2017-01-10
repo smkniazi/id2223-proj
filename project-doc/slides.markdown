@@ -71,9 +71,8 @@
 
 ## Evaluation
 
-![MSE of the FFN](./img/result_ff.png)
+![Minimum MSE: 0.000491042](./img/result_ff.png)
 
-- minimum MSE: 0.000491042
 
 ## Evaluation
 
