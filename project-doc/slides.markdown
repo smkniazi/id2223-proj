@@ -4,6 +4,7 @@
 
 ## Project Description
 - Predict the solar radiation near Earth surface   
+- Replace the analytical model with a Neural Network Model
 
 ## Data Samples
 - **0.4 million samples**
@@ -82,6 +83,7 @@
 
 - low MSE
 - does not capture the spikes
+- different configurations
 
 ## Convolution Neural Network
 

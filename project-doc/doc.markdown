@@ -58,7 +58,7 @@ We have implemented the solution using the *feed forward neural networks* and *c
 ## Initial Solution
 According to the universal approximation theorem, Feedforward neural networks with a single
 hidden layer can approximate continuous functions. In our problem we are trying to replace an
-analytical model with a statistical model to enhance the performance; hence a feedforward
+analytical model to enhance the performance; hence a feedforward
 neural network with a single hidden layer is ought to be a suitable solution.
 
 ### Feedforward Neural Network Model
