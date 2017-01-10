@@ -38,7 +38,6 @@
 |24|942.308|26.804|26.464|-0.053|
 |25|980.769|29.988|27.285|-1.448|
 
-
 ## Data Samples
 ![Data Samples](./img/samples.png){height=300px}
 
@@ -91,15 +90,9 @@
 - To try to capture the spikes we opt to CNNs
 - Kernels within CNN can detect local patterns
 
-## Input
-- The input can be morphed into 26 x 2 matrix
-	- did not produce very promissing results, as pooling can not shink the width of the input matrix.
-		- Min MSE observed was 0.3
-
-![26x2 Input Matrix](./img/26x2.png){height=200px}
 
 
-## Input (Cont'd)
+## Input 
 - The input can be morphed into 8 x 8 matrix
 	- padding is needed as there are only 52 input features
 
